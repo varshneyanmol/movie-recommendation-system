@@ -12,7 +12,7 @@ public class Reducer2 extends Reducer<Text, Text, Text, Text> {
 	public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
 		double similarityScore = 0.0;
 		String[] X_Y;
-		double n = 0.0;
+		double n = 0.0;	// 'n' is the number of reviewers who have rated both the movies
 
 		double sigmaX = 0.0;
 		double sigmaY = 0.0;
@@ -38,9 +38,8 @@ public class Reducer2 extends Reducer<Text, Text, Text, Text> {
 			sigmaYsqr += Y * Y;
 		}
 
-		if (n == 1) {
-			similarityScore = 0.0; // no need to write beacuse only one user has
-									// rated both the movies.
+		if (n == 1 || n == 2) { // although at n=2, similarity score would not be zero but I want at least 3 reviewers in common to have reviewed both the movies.
+			similarityScore = 0.0; 
 
 		} else {
 

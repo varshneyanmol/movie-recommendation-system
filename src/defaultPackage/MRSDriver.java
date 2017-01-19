@@ -18,10 +18,10 @@ public class MRSDriver {
 		Job job1 = Job.getInstance(conf);
 
 		job1.setJarByClass(MRSDriver.class);
-		job1.setJobName("movie similarity calculator Job1");
+		job1.setJobName("movie similarity calculator Job_1");
 
 		Path inputPath = new Path("hdfs://localhost:54310/user/hduser/MRSinput/");
-		Path outputPath = new Path("hdfs://localhost:54310/user/hduser/MRSoutputJob1/");
+		Path outputPath = new Path("hdfs://localhost:54310/user/hduser/MRSMBoutputJob1/");
 		FileInputFormat.addInputPath(job1, inputPath);
 		FileOutputFormat.setOutputPath(job1, outputPath);
 
@@ -36,10 +36,10 @@ public class MRSDriver {
 		Job job2 = Job.getInstance(conf);
 
 		job2.setJarByClass(MRSDriver.class);
-		job2.setJobName("movie similarity calculator Job2");
+		job2.setJobName("movie similarity calculator Job_2");
 
-		Path inputPath2 = new Path("hdfs://localhost:54310/user/hduser/MRSoutputJob1/");
-		Path outputPath2 = new Path("hdfs://localhost:54310/user/hduser/MRSoutputFinal/");
+		Path inputPath2 = new Path("hdfs://localhost:54310/user/hduser/MRSMBoutputJob1/");
+		Path outputPath2 = new Path("hdfs://localhost:54310/user/hduser/MRSMBoutputFinal/");
 		FileInputFormat.addInputPath(job2, inputPath2);
 		FileOutputFormat.setOutputPath(job2, outputPath2);
 
