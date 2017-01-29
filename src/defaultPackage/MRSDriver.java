@@ -39,7 +39,7 @@ public class MRSDriver {
 		job2.setJobName("movie similarity calculator Job_2");
 
 		Path inputPath2 = new Path("hdfs://localhost:54310/user/hduser/MRSMBoutputJob1/");
-		Path outputPath2 = new Path("hdfs://localhost:54310/user/hduser/MRSMBoutputFinal/");
+		Path outputPath2 = new Path("hdfs://localhost:54310/user/hduser/MRSMBoutputJob2/");
 		FileInputFormat.addInputPath(job2, inputPath2);
 		FileOutputFormat.setOutputPath(job2, outputPath2);
 
@@ -51,7 +51,29 @@ public class MRSDriver {
 		job2.setOutputKeyClass(Text.class);
 		job2.setOutputValueClass(Text.class);
 
-		System.exit(job2.waitForCompletion(true) ? 0 : 1);
+		job2.waitForCompletion(true);
+		
+		
+		Configuration conf_job3 = new Configuration();
+		conf_job3.set("mapreduce.output.textoutputformat.separator", ",");
+		Job job3 = Job.getInstance(conf_job3);
+
+		job3.setJarByClass(MRSDriver.class);
+		job3.setJobName("movie similarity calculator Job_3");
+
+		Path inputPath3 = new Path("hdfs://localhost:54310/user/hduser/MRSMBoutputJob2/");
+		Path outputPath3 = new Path("hdfs://localhost:54310/user/hduser/MRSMBoutputJob3/");
+		FileInputFormat.addInputPath(job3, inputPath3);
+		FileOutputFormat.setOutputPath(job3, outputPath3);
+
+		job3.setInputFormatClass(KeyValueTextInputFormat.class);
+		
+		job3.setMapperClass(Mapper3.class);
+		job3.setReducerClass(Reducer3.class);
+		job3.setOutputKeyClass(Text.class);
+		job3.setOutputValueClass(Text.class);
+
+		System.exit(job3.waitForCompletion(true) ? 0 : 1);
 
 	}
 }

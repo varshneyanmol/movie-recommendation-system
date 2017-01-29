@@ -12,7 +12,7 @@ public class Mapper2 extends Mapper<Text, Text, Text, Text>{
 	
 	@Override
 	public void map(Text key, Text value, Context context) throws IOException, InterruptedException {
-		System.out.println("in mapper 2");
+		//System.out.println("in mapper 2");
 		String oneReviewerMovieRatingsCombined = value.toString();
 		String[] movieRatingsPairs = oneReviewerMovieRatingsCombined.split(" ");
 		
@@ -36,7 +36,7 @@ public class Mapper2 extends Mapper<Text, Text, Text, Text>{
 				
 					moviePair.set(movie_id1 + "," + movie_id2);
 					ratingPair.set(movieRatingMap.get(movie_id1) + "," + movieRatingMap.get(movie_id2));
-					System.out.println(moviePair.toString() + "  " + ratingPair.toString());
+					//System.out.println(moviePair.toString() + "  " + ratingPair.toString());
 					context.write(moviePair, ratingPair);
 				}
 			}
